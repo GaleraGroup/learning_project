@@ -7,11 +7,11 @@ let lastWatchingFilmRate = prompt('На сколько его оцените?');
 let personalMovieDB = {
     count: +numberOfFilms,
     movies: {
-        lastWathcingFilm: lastWatchingFilmRate
+        [lastWathcingFilm]: lastWatchingFilmRate
     },
     actors: {},
     genres: [],
     privat: false
-}
+};
 
-
+console.log(personalMovieDB)
