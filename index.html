@@ -20,7 +20,7 @@
             </nav>
         </div>
         <div class="header__right-block">
-            <button class="btn btn_white">Связаться с нами</button>
+            <button data-modal class="btn btn_white">Связаться с нами</button>
         </div>
     </header>
     <div class="sidepanel">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="offer__action">
-                <button class="btn btn_dark">Связаться с нами</button>
+                <button data-modal class="btn btn_dark">Связаться с нами</button>
             </div>
         </div>
         <div class="container">
@@ -271,19 +271,19 @@
                 <div class="title">Осталось до конца акции:</div>
                 <div class="timer">
                     <div class="timer__block">
-                        <span id="days">12</span>
+                        <span id="days">00</span>
                         дней
                     </div>
                     <div class="timer__block">
-                        <span id="hours">20</span>
+                        <span id="hours">00</span>
                         часов
                     </div>
                     <div class="timer__block">
-                        <span id="minutes">56</span>
+                        <span id="minutes">00</span>
                         минут
                     </div>
                     <div class="timer__block">
-                        <span id="seconds">20</span>
+                        <span id="seconds">00</span>
                         секунд
                     </div>
                 </div>
@@ -322,7 +322,26 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="modal-panel">
+        <div class="modal__dialog">
+            <div class="modal__content">
+                <form action="#">
+                    <div class="modal__close">&times;</div>
+                    <div class="modal__title">Введите информацию для формирования меню</div>
+                    <input required placeholder="Изображение" name="img" type="text" class="modal__input">
+                    <input required placeholder="Заголовок" name="title" type="text" class="modal__input">
+                    <input required placeholder="Описание" name="descr" type="text" class="modal__inpu">
+                    <input required placeholder="Цена" name="price" type="text" class="modal__input">
+                    <button class="btn btn_dark btn_min btn_add">Добавить карточку</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
     <script src="js/tabcontent.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/cards.js"></script>
 </body>
 
 </html>

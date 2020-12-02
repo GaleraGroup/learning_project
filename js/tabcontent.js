@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 window.addEventListener('DOMContentLoaded', () => {
     const tabsParent = document.querySelector('.tabheader__items'),
@@ -48,3 +48,19 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+// const btnWhite = document.querySelector('.btn_white');
+// let id;
+
+// btnWhite.addEventListener('click', (evt) => {
+//     id = setInterval(foo, 2000);
+//     setTimeout(() => {
+//         clearInterval(id)
+//     }, 5000);
+// })
+
+// console.log(id)
+// function foo() {
+//     console.log('text')
+// }
