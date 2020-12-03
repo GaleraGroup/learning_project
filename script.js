@@ -8,13 +8,10 @@ const personalMovieDB = {
     privat: false,
 
     start: function () {
-        let numberOfFilms;
-        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-        while (!numberOfFilms || isNaN(numberOfFilms)) {
-            numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+        this.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+        while (!this.count || isNaN(this.count)) {
+            this.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
         }
-        this.count = numberOfFilms;
-        this.rememberMyFilms();
     },
     rememberMyFilms: function () {
         for (let i = 0; i < 2; i++) {
@@ -29,7 +26,6 @@ const personalMovieDB = {
                 i--;
             }
         }
-        this.detectPersonalLevel();
     },
     detectPersonalLevel: function () {
         if (this.count < 10) {
@@ -41,7 +37,6 @@ const personalMovieDB = {
         } else {
             console.log("Произошла ошибка");
         }
-        this.writeYourGenres();
     },
     writeYourGenres: function () {
         for (let i = 1; i < 4 ; i++) {
@@ -51,7 +46,6 @@ const personalMovieDB = {
             }
         }
         this.genres.forEach((item, i) => console.log(`Любимый жанр #${i + 1} - это ${item}`));
-        this.toggleVisibleMyDB();
     },
     toggleVisibleMyDB: function () {
         if (this.privat) {
@@ -65,3 +59,5 @@ const personalMovieDB = {
 
 personalMovieDB.start();
 console.log(personalMovieDB);
+
+console.log(typeof Infinity )
