@@ -3,7 +3,7 @@
 
 window.addEventListener('DOMContentLoaded', () => {
     class Card {
-        constructor(img, alt, title, description, price, parentSelector, ...classes) {
+        constructor([img, alt, title, description, price], parentSelector, ...classes) {
             this.img = img;
             this.alt = alt;
             this.title = title;
@@ -43,22 +43,32 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const customCard = new Card (
-        'img/tabs/elite.jpg',
-        'elite',
-        'Завтрак для альфа - самцов',
-        'Похавай от души, как кабан',
-         50,
-        '.menu__field .container',
-        'menu__item',
-        'big'
-    );
+    // const customCard = new Card (
+    //     'img/tabs/elite.jpg',
+    //     'elite',
+    //     'Завтрак для альфа - самцов',
+    //     'Похавай от души, как кабан',
+    //      50,
+    //     '.menu__field .container',
+    //     'menu__item',
+    //     'big'
+    // );
+
+    fetch('http://localhost:3000/menu')
+        .then(response => response.json())
+        .then(json => {
+            json.forEach(item => {
+                const customCard = new Card(Object.values(item));
+                //console.log(customCard.classes)
+                customCard.render();
+            });
+        });
+
     
-    customCard.render();
 });
 
 
-
+//img, alt, title, description, price, parentSelector, ...classes
 
 
 //Классы и их экземпляры

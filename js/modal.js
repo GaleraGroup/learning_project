@@ -46,9 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('show');
         modal.classList.remove('hide');
         document.body.style.overflow = 'hidden';
-        if (document.querySelector('.status')) {
-            document.querySelector('.status').remove();
-        } 
     }
 
     function modalClose() {
@@ -83,15 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const statusMsg = document.createElement('img');
             statusMsg.src = msg.loading;
             statusMsg.classList.add('status');
-            // statusMsg.style.cssText = `
-            //     display: block;
-            //     margin: 0 auto;
-            // `;
             form.insertAdjacentElement('afterend', statusMsg);
-
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
-            request.setRequestHeader('Content-type', 'application/json');
 
             const formData = new FormData(form);
             const obj = {};
@@ -99,21 +88,43 @@ window.addEventListener('DOMContentLoaded', () => {
                 obj[key] = value;
             });
 
-            request.send(JSON.stringify(obj));
-
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
-                    showThanksModal(msg.success);
-                    form.reset();
-                } else {
-                    showThanksModal(msg.failure);
-                }
+            fetch('server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(data => data.text())
+            .then(data => {
+                console.log(data);
+                showThanksModal(msg.success);
+                form.reset();
+                statusMsg.remove();
+            }).catch(() => {
+                showThanksModal(msg.failure);
+            }).finally(() => {
+                form.reset();
             });
+            // const request = new XMLHttpRequest();
+            // request.open('POST', 'server.php');
+            // request.setRequestHeader('Content-type', 'application/json');
+
+            //request.send(JSON.stringify(obj));
+
+            // request.addEventListener('load', () => {
+            //     if (request.status === 200) {
+            //         console.log(request.response);
+            //         showThanksModal(msg.success);
+            //         form.reset();
+            //     } else {
+            //         showThanksModal(msg.failure);
+            //     }
+            // });
         });
     }
 
-    function showThanksModal (msg) {
+    function showThanksModal(msg) {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
@@ -129,7 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="modal__title">${msg}</div>
         </form>
         `;
-        
+
         modal.append(thanksModal);
         setTimeout(() => {
             thanksModal.remove();
