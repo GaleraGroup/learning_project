@@ -70,10 +70,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     formModalDialog.forEach(form => {
-        postData(form);
+        bindPostData(form);
     });
 
-    function postData(form) {
+    const postData = async (url, data) => {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data
+        }); 
+        return await res.json();
+    };
+
+    function bindPostData(form) {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             // Спиннер, loading
@@ -83,19 +94,14 @@ window.addEventListener('DOMContentLoaded', () => {
             form.insertAdjacentElement('afterend', statusMsg);
 
             const formData = new FormData(form);
-            const obj = {};
-            formData.forEach((value, key) => {
-                obj[key] = value;
-            });
+            // const obj = {};
+            // formData.forEach((value, key) => {
+            //     obj[key] = value;
+            // });
+            //Берем formData, с помощью entries превращаем в массив массивов, затем с помощью fromEntries - в объект, после в json
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-            fetch('server.php', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            })
-            .then(data => data.text())
+            postData('http://localhost:3000/requests', json)
             .then(data => {
                 console.log(data);
                 showThanksModal(msg.success);
