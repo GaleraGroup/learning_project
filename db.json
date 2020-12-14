@@ -22,6 +22,32 @@
       "price": 21
     }
   ],
+  "sliderItems": [
+    {
+      "img": "img/slider/food-12.jpg"
+    },
+    {
+      "img": "img/slider/olive-oil.jpg"
+    },
+    {
+      "img": "img/slider/paprika.jpg"
+    },
+    {
+      "img": "img/slider/pepper.jpg"
+    },
+    {
+      "img": "img/slider/food-12.jpg"
+    },
+    {
+      "img": "img/slider/olive-oil.jpg"
+    },
+    {
+      "img": "img/slider/paprika.jpg"
+    },
+    {
+      "img": "img/slider/pepper.jpg"
+    }
+  ],
   "requests": [
     {
       "name": "Andrew Mokrousov",
@@ -57,6 +83,16 @@
       "name": "Андрей",
       "phone": "123123",
       "id": 7
+    },
+    {
+      "name": "Andrew Mokrousov",
+      "phone": "9996268138",
+      "id": 8
+    },
+    {
+      "name": "Andrew Mokrousov",
+      "phone": "9996268138",
+      "id": 9
     }
   ]
 }
