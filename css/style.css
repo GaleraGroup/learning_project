@@ -774,3 +774,9 @@ a
     opacity: .5;
     transition: opacity .6s ease;
 }
+
+.dotactive {
+
+    background-color: #fff;
+   
+}

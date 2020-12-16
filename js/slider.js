@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             indicator.classList.add('dot');
             
             for (let i = 0; i <= Object.keys(list).length; i++) {
-                console.log(i)
                 carouselIndicators.append(indicator);
             }
             sliderContainer.append(slide);
