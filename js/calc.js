@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gender = calcFields.querySelector('#gender'),
         mediumChoose = calcFields.querySelector('.calculating__choose_medium'),
         bigChoose = calcFields.querySelector('.calculating__choose_big'),
-        calc = document.querySelector('.calculating');
-
+        calc = document.querySelector('.calculating'),
+        result = document.querySelector('.calculating__result span');
 
 
     parseChildrenBlocks(calcFields);
@@ -81,19 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    ///Хуйню эту переписать
     function getHWA() {
-        Array.from(mediumChoose.children).forEach(field => {
-            field.addEventListener('click', (evt) => {
-                if (field.value && typeof + field.value === 'number' && !isNaN(+field.value)) {
-                    if (field.id === 'height') {
-                        calcResult.height = field.value;
-                    } else if (field.id === 'weight') {
-                        calcResult.weight = field.value;
-                    } else {
-                        calcResult.age = field.value;
-                    }
+        Array.from(mediumChoose.children).forEach(item => {
+            item.addEventListener('input', (evt) => {
+                switch (evt.target.getAttribute('id')) {
+                    case 'height':
+                        calcResult.height = evt.target.value;
+                        break;
+                    case 'weight':
+                        calcResult.weight = evt.target.value;
+                        break;
+                    case 'age':
+                        calcResult.age = evt.target.value;
+                        break;
                 }
+
             });
         });
     }
@@ -106,13 +108,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     calc.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('calculating__choose-item')) {
-            console.log(calcResult)
+            if (!calcResult.height || !calcResult.weight || !calcResult.age) {
+                result.textContent = '___';
+                return;
+            } calculate(calcResult);
         }
-
-
     });
 
+    function calculate(calcResult) {
+
+        let bmr = 0;
+        console.log(Object.values(calcResult));
+        if (calcResult.gender === 'male') {
+            bmr = 88.36 + (13.4 * calcResult.weight) + (4.8 * calcResult.height) - (5.7 * calcResult.age);
+            getIndexBMR(bmr);
+        } else if (calcResult.gender === 'female') {
+            bmr = 447.6 + (9.2 * calcResult.weight) + (3.1 * calcResult.height) - (4.3 * calcResult.age);
+            getIndexBMR(bmr);
+        }
+
+        function getIndexBMR(bmr) {
+            if (calcResult.activity === 'low') {
+                result.textContent = Math.round(bmr * 1.2);
+            } else if (calcResult.activity === 'small') {
+                result.textContent = Math.round(bmr * 1.375);
+            } else if (calcResult.activity === 'medium') {
+                result.textContent = Math.round(bmr * 1.55);
+            } else if (calcResult.activity === 'high') {
+                result.textContent = Math.round(bmr * 1.725);
+            }
+        }
+    }
 });

@@ -412,6 +412,12 @@ a
 	background-color: #54ed39;
 	color: #fff;
 }
+
+.calculating__choose-item:focus,
+.calculating__choose-item_active:focus
+{
+	border: 1px solid #259f10;
+}
 .calculating__choose_medium
 {
 	justify-content: space-between;

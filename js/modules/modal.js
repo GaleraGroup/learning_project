@@ -1,7 +1,6 @@
 'use strict';
 
-
-window.addEventListener('DOMContentLoaded', () => {
+function modal() {
 
     // Функционал открытия/закрытия модального окна при нажатии на кнопку связи
     const btnModalOpener = document.querySelectorAll('[data-modal]'),
@@ -80,7 +79,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 'Content-type': 'application/json'
             },
             body: data
-        }); 
+        });
         return await res.json();
     };
 
@@ -102,16 +101,16 @@ window.addEventListener('DOMContentLoaded', () => {
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
             postData('http://localhost:3000/requests', json)
-            .then(data => {
-                console.log(data);
-                showThanksModal(msg.success);
-                form.reset();
-                statusMsg.remove();
-            }).catch(() => {
-                showThanksModal(msg.failure);
-            }).finally(() => {
-                form.reset();
-            });
+                .then(data => {
+                    console.log(data);
+                    showThanksModal(msg.success);
+                    form.reset();
+                    statusMsg.remove();
+                }).catch(() => {
+                    showThanksModal(msg.failure);
+                }).finally(() => {
+                    form.reset();
+                });
             // const request = new XMLHttpRequest();
             // request.open('POST', 'server.php');
             // request.setRequestHeader('Content-type', 'application/json');
@@ -140,12 +139,12 @@ window.addEventListener('DOMContentLoaded', () => {
         thanksModal.classList.add('modal__dialog');
 
         thanksModal.innerHTML = `
-        <div class="modal__content">
-        <form action="#">
-            <div class="modal__close">&times;</div>
-            <div class="modal__title">${msg}</div>
-        </form>
-        `;
+            <div class="modal__content">
+            <form action="#">
+                <div class="modal__close">&times;</div>
+                <div class="modal__title">${msg}</div>
+            </form>
+            `;
 
         modal.append(thanksModal);
         setTimeout(() => {
@@ -155,4 +154,6 @@ window.addEventListener('DOMContentLoaded', () => {
             modalClose();
         }, 2000);
     }
-});
+}
+
+modal.exports = modal;
