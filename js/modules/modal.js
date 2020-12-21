@@ -1,7 +1,8 @@
-'use strict';
+import {postData} from '../services/services';
+
 
 function modal() {
-
+    
     // Функционал открытия/закрытия модального окна при нажатии на кнопку связи
     const btnModalOpener = document.querySelectorAll('[data-modal]'),
         modal = document.querySelector('.modal'),
@@ -40,7 +41,6 @@ function modal() {
         }
     }
 
-
     function modalOpen() {
         modal.classList.add('show');
         modal.classList.remove('hide');
@@ -54,9 +54,6 @@ function modal() {
             document.body.style.overflow = 'auto';
         }
     }
-
-
-
 
     // Функционал внутренних форм и взаимодействия с ними
     const formModalDialog = document.querySelectorAll('form');
@@ -72,20 +69,10 @@ function modal() {
         bindPostData(form);
     });
 
-    const postData = async (url, data) => {
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data
-        });
-        return await res.json();
-    };
-
     function bindPostData(form) {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
+
             // Спиннер, loading
             const statusMsg = document.createElement('img');
             statusMsg.src = msg.loading;
@@ -97,9 +84,10 @@ function modal() {
             // formData.forEach((value, key) => {
             //     obj[key] = value;
             // });
+
             //Берем formData, с помощью entries превращаем в массив массивов, затем с помощью fromEntries - в объект, после в json
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
-
+   
             postData('http://localhost:3000/requests', json)
                 .then(data => {
                     console.log(data);
@@ -111,21 +99,6 @@ function modal() {
                 }).finally(() => {
                     form.reset();
                 });
-            // const request = new XMLHttpRequest();
-            // request.open('POST', 'server.php');
-            // request.setRequestHeader('Content-type', 'application/json');
-
-            //request.send(JSON.stringify(obj));
-
-            // request.addEventListener('load', () => {
-            //     if (request.status === 200) {
-            //         console.log(request.response);
-            //         showThanksModal(msg.success);
-            //         form.reset();
-            //     } else {
-            //         showThanksModal(msg.failure);
-            //     }
-            // });
         });
     }
 
@@ -156,4 +129,4 @@ function modal() {
     }
 }
 
-modal.exports = modal;
+export{modal};

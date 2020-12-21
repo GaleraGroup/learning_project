@@ -1,4 +1,5 @@
-'use strict';
+import {postData} from '../services/services';
+
 
 function calc() {
     const calcFields = document.querySelector('.calculating__field'),
@@ -148,18 +149,6 @@ function calc() {
         }
     }
 
-    const postData = async (url, data) => {
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: data
-        });
-        return await res.json();
-    };
-
-
     function renderBtn() {
         const saveBtn = document.createElement('div');
         saveBtn.classList.add('btn', 'btn_white');
@@ -199,4 +188,4 @@ function calc() {
     }
 }
 
-module.exports = calc;
+export {calc};

@@ -1,4 +1,6 @@
-'use strict';
+
+import {getResFromDB} from '../services/services';
+
 
 function cards() {
 
@@ -34,11 +36,8 @@ function cards() {
         }
     }
 
-    const getCardsFromDB = async (url) => {
-        return await fetch(url);
-    };
-
-    getCardsFromDB('http://localhost:3000/menu')
+    const url = 'http://localhost:3000/menu';
+    getResFromDB(url)
         .then(async res => {
             if (res.ok) {
                 let json = await res.json();
@@ -51,4 +50,4 @@ function cards() {
         });
 }
 
-module.exports = cards;
+export {cards};

@@ -1,32 +1,29 @@
-'use strict';
-
-function tabs() {
-    const tabsParent = document.querySelector('.tabheader__items'),
-        tabs = document.querySelectorAll('.tabheader__item'),
-        tabsContent = document.querySelectorAll('.tabcontent');
-
+function tabs(tabHeader, tabHeaderItem, tabContent, tabHeaderActiveClass) {
+    const tabsParent = document.querySelector(tabHeader),
+          tabs = document.querySelectorAll(tabHeaderItem),
+          tabsContent = document.querySelectorAll(tabContent);
+          
     const visibilitySwitch = {
         hideTabContent() {
             tabsContent.forEach(item => {
                 item.style.display = 'none';
             });
-
             tabs.forEach(tab => {
-                tab.classList.remove('tabheader__item_active');
+                tab.classList.remove(tabHeaderActiveClass.slice(1));
             });
         },
         showTabContent(i = 0) {
             tabsContent[i].style.display = 'block';
             tabsContent[i].classList.add('fade');
-            tabs[i].classList.add('tabheader__item_active');
+            tabs[i].classList.add(tabHeaderActiveClass.slice(1));
         },
         hideClassActive() {
             tabs.forEach(tab => {
-                tab.classList.remove('tabheader__item_active');
+                tab.classList.remove(tabHeaderActiveClass.slice(1));
             });
         },
         showClassActive(event) {
-            event.target.classList.add('tabheader__item_active');
+            event.target.classList.add(tabHeaderActiveClass.slice(1));
         }
     };
 
@@ -36,7 +33,7 @@ function tabs() {
     tabsParent.addEventListener('click', (evt) => {
         evt.preventDefault();
         const target = evt.target;
-        if (target && target.matches('div.tabheader__item') && !target.classList.contains('tabheader__item_active')) {
+        if (target && target.matches('div.tabheader__item') && !target.classList.contains(tabHeaderActiveClass.slice(1))) {
             tabs.forEach((item, i) => {
                 if (item.innerText === target.innerText) {
                     visibilitySwitch.hideClassActive();
@@ -49,20 +46,4 @@ function tabs() {
     });
 }
 
-module.exports = tabs;
-
-
-// const btnWhite = document.querySelector('.btn_white');
-// let id;
-
-// btnWhite.addEventListener('click', (evt) => {
-//     id = setInterval(foo, 2000);
-//     setTimeout(() => {
-//         clearInterval(id)
-//     }, 5000);
-// })
-
-// console.log(id)
-// function foo() {
-//     console.log('text')
-// }
+export{tabs};

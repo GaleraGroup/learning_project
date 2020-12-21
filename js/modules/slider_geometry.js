@@ -1,18 +1,15 @@
-'use strict';
-
-function slider() {
+function slider({container, inner, currentCounter, totalCounter, leftArrow, rightArrow,indicators}) {
     //Переменные слайдера и счетчика
-    const sliderContainer = document.querySelector('.offer__slider-wrapper'),
-        sliderInner = document.querySelector('.offer__slider-inner'),
-        current = document.querySelector('#current'),
-        total = document.querySelector('#total'),
-        left = document.querySelector('.offer__slider-prev'),
-        right = document.querySelector('.offer__slider-next'),
+    const sliderContainer = document.querySelector(container),
+        sliderInner = document.querySelector(inner),
+        current = document.querySelector(currentCounter),
+        total = document.querySelector(totalCounter),
+        left = document.querySelector(leftArrow),
+        right = document.querySelector(rightArrow),
         width = window.getComputedStyle(sliderContainer).width;
 
     //Переменные переключателя карусели
-    const carousel = document.querySelector('.carousel-indicators');
-
+    const carousel = document.querySelector(indicators);
 
     //Остальные переменные
     let offset = 0;
@@ -139,4 +136,4 @@ function slider() {
     }
 }
 
-module.exports = slider;
+export{slider};

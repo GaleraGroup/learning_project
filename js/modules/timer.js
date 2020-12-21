@@ -1,22 +1,16 @@
-'use strict';
+function timer(d, h, m, s, promoClass, promorTitle, endActionDate) {
 
-function timer() {
-    const timer = document.querySelector('.timer'),
-        //timerBlocks = timer.querySelectorAll('.timer__block'),
-        timerDays = document.querySelector('#days'),
-        timerHours = document.querySelector('#hours'),
-        timerMinutes = document.querySelector('#minutes'),
-        timerSeconds = document.querySelector('#seconds'),
-        promo = document.querySelector('.promotion__timer'),
-        promoTitle = promo.querySelector('.title');
+    const timerDays = document.querySelector(d),
+          timerHours = document.querySelector(h),
+          timerMinutes = document.querySelector(m),
+          timerSeconds = document.querySelector(s),
+          promo = document.querySelector(promoClass),
+          promoTitle = promo.querySelector(promorTitle);
 
 
     promoTitle.innerText = 'До Нового года осталось:';
 
     const timeArray = [timerDays, timerHours, timerMinutes, timerSeconds];
-
-    const endActionDate = '2020-12-31';
-
 
     function getDiffTimeRange(endTime) {
         const t = Date.parse(endTime) - Date.parse(new Date()),
@@ -51,4 +45,4 @@ function timer() {
     }, 1000);
 }
 
-module.exports = timer;
+export {timer};
